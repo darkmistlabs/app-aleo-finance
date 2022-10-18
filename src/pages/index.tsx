@@ -7,11 +7,19 @@ import {
   Input,
   Spacer,
   Text,
-  Link
+  Link,
+  theme
 } from '@nextui-org/react'
 import styles from '../styles/Home.module.css'
 
+import { useTheme as useNextTheme } from 'next-themes'
+import { Switch, useTheme } from '@nextui-org/react'
+import { GitHub } from 'react-feather'
+
 const Home: NextPage = () => {
+  const { setTheme } = useNextTheme();
+  const { isDark, type } = useTheme();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -31,11 +39,15 @@ const Home: NextPage = () => {
         alignItems="center"
         style={{ height: '100vh' }}
       >
+        <Switch
+          checked={isDark}
+          onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
+        />
         <Spacer />
-        <Image src="/logo.svg" alt="Vercel Logo" width={200} height={200} />
+        {/* <Image src="/logo.svg" alt="Vercel Logo" width={200} height={200} /> */}
         <Spacer />
         <Text h1 className={styles.title} style={{ display: 'flex' }}>
-          Welcome to Aleo Finance
+          Brings Aleo to DeFi
         </Text>
         <Spacer />
         <Input bordered color="default" placeholder="Type something" size="lg" />
@@ -43,7 +55,10 @@ const Home: NextPage = () => {
         <Input bordered color="secondary" placeholder="Type something" size="lg" />
 
         <Spacer />
-        <Button color="primary" size="lg">Primary</Button>
+        <Button color="primary" size="lg">
+          <GitHub size={18} style={{ marginRight: 10 }} />
+          Show on Github
+        </Button>
         <Spacer y={0.5} />
         <Button color="secondary" size="lg">Secondary</Button>
         <Spacer y={0.5} />
@@ -52,17 +67,6 @@ const Home: NextPage = () => {
         <Button color="warning" size="lg">Warning</Button>
         <Spacer y={0.5} />
         <Button color="error" size="lg">Error</Button>
-        <Spacer />
-        <Button size="lg">
-          <a
-            className={styles.button}
-            href="https://github.com/nextui-org/nextui"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Show on Github
-          </a>
-        </Button>
       </Container>
     </div>
   )
