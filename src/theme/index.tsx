@@ -1,4 +1,4 @@
-import { useMemo, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { createTheme, NextUIProvider } from "@nextui-org/react"
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
